@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title %}3D Design Layout {%endblock%}</title>
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+
+        /* Menu */
+        .menu {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background 0.3s ease;
+        }
+
+        .menu ul li a:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        /* Main content layout */
+        .main-content {
+            display: flex;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #4caf50;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .filters label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .info-block {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .info-block img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .info-block h3 {
+            margin-bottom: 10px;
+            color: #4caf50;
+        }
+
+        .info-block .price {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 20px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="info">About</a></li>
+            <li><a href="products">Products</a></li>
+            <li><a href="contacts">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <aside class="sidebar">
+            {%block sidebar%}
+            <h2>Каталог</h2>
+            <ul>
+                <li><a href="#">Категория 1</a></li>
+                <li><a href="#">Категория 2</a></li>
+                <li><a href="#">Категория 3</a></li>
+            </ul>
+            <h2>Фильтры</h2>
+            <div class="filters">
+                <label><input type="checkbox"> Фильтр 1</label>
+                <label><input type="checkbox"> Фильтр 2</label>
+                <label><input type="checkbox"> Фильтр 3</label>
+            </div>
+            {%endblock%}
+        </aside>
+
+        {%block content%}<section class="content">
+            {%for element in info%}
+            <div class="info-block">
+                <img src="{{element.image.url}}" alt="Product 1">
+                <h3>{{element.name}}</h3>
+                <p>{{element.description}}</p>
+                <p class="price">Цена: {{element.price}}</p>
+            </div>{%endfor%}
+        </section>{%endblock%}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="logo.png" alt="Footer Logo" class="footer-logo">
+            <p>&copy; 2024 Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script can handle dynamic filter or catalog actions if needed
+        document.querySelectorAll('.filters input').forEach(filter => {
+            filter.addEventListener('change', () => {
+                console.log('Filter changed:', filter.checked);
+            });
+        });
+    </script>
+</body>
+</html>
